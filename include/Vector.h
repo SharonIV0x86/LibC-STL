@@ -1,22 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef enum
-{
-    STR,
-    INT,
-    FLOAT,
-    CHAR,
-    DOUBLE
-} DataType;
+#include <stddef.h>
+#include "./types.h"
 
-typedef struct vector
+void *at(Vector *vec, size_t index);
+Iterator *create_iterator(DataType type, void *container)
 {
-    void **data;
-    size_t capacity;
-    size_t size;
-    DataType type;
-} Vector;
+    Iterator *iterator = (Iterator *)malloc(sizeof(Iterator));
+    iterator->type = type;
+    iterator->index = 0;
+    iterator->container = container;
+    
+    if(setContainerIteratorPropertiesAsPerType(type, iterator, container));
+    // if(type == VECTOR_INT){
+    // printf("\nIterator pointing to vector_int \n");
+    // iterator->pointing_container_properties.size = ((Vector *)container)->size;
+    // iterator->pointing_container_properties.capacity = ((Vector *)container)->capacity;
+    // }
+    if (container != NULL)
+    {
+        if (iterator != NULL)
+        {
+            iterator->data = at(container, 0);
+        }
+        return iterator;
+    }
+    return iterator;
+}
+void advance(Iterator *itr)
+{
+    if (itr != NULL && itr->data != NULL)
+    {
+        itr->data = at(itr->container, itr->index + 1);
+        itr->index++;
+    }
+}
+void advance_by(Iterator *itr, size_t step)
+{
+    if (itr != NULL && itr->data != NULL && step >= 0)
+    {
+        itr->data = at(itr->container, itr->index + step);
+        itr->index += step;
+    }
+}
+void itr_reset(Iterator *itr)
+{
+    if (itr != NULL && itr->data != NULL)
+    {
+        itr->data = at(itr->container, 0);
+    }
+}
 
 Vector *create_vector(size_t capacity, DataType type)
 {
@@ -154,9 +188,11 @@ int pb_double(Vector *vec, double value)
         printf("\n Expected type to be DOUBLE received -> %d -> INVALID \n ", vec->type);
         return 0;
     }
-    if(vec->size >= vec->capacity){
+    if (vec->size >= vec->capacity)
+    {
         size_t __new__capacity = (vec->capacity == 0) ? 1 : vec->capacity * 1.5;
-        if(!resize_vector(vec, __new__capacity)){
+        if (!resize_vector(vec, __new__capacity))
+        {
             return 0;
         }
     }
