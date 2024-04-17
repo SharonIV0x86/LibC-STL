@@ -50,13 +50,13 @@ int main() {
     Vector *double_vector = create_vector(5, DOUBLE);
 
     // Pushing data into the vectors
-    push_back_int(int_vector, 10);
-    push_back_int(int_vector, 20);
-    push_back_int(int_vector, 30);
+    pb_int(int_vector, 10);
+    pb_int(int_vector, 20);
+    pb_int(int_vector, 30);
 
-    push_back_float(float_vector, 3.14f);
-    push_back_float(float_vector, 2.718f);
-    push_back_float(float_vector, 1.618f);
+    pb_float(float_vector, 3.14f);
+    pb_float(float_vector, 2.718f);
+    pb_float(float_vector, 1.618f);
 
     pb_char(char_vector, 'a');
     pb_char(char_vector, 'b');

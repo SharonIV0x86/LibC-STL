@@ -63,7 +63,7 @@ int resize_vector(Vector *vec, size_t size)
     return 1;
 }
 
-int push_back_int(Vector *vec, int value)
+int pb_int(Vector *vec, int value)
 {
     if (vec->type != INT)
     {
@@ -83,7 +83,7 @@ int push_back_int(Vector *vec, int value)
     return 1;
 }
 
-int push_back_float(Vector *vec, float value)
+int pb_float(Vector *vec, float value)
 {
     if (vec->type != FLOAT)
     {
