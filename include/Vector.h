@@ -170,7 +170,7 @@ void *at(Vector *vec, size_t index)
 {
     if (vec->type == STR)
     {
-        char *str = vec->data[index];
+        char *str = (char *)vec->data[index];
         size_t len = strlen(str);
         if (len > 0 && str[len - 1] == '\n')
         { // for removing leading new line character from the strings using fgets()

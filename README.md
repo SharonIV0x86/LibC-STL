@@ -110,7 +110,7 @@ int main() {
 ```
 
 ## Feedback and Support
-If you have any feedback, suggestions, or questions regarding the project, please feel free to [open an issue].
+If you have any feedback, suggestions, or questions regarding the project, please feel free to open an issue.
 
 ## Acknowledgements
 We would like to express our gratitude to the creators and maintainers of the C++ STL, whose work has inspired this project. Additionally, we thank all contributors and users for their valuable feedback and contributions.
