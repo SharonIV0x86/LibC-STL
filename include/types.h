@@ -38,7 +38,7 @@ typedef struct iterator
     DataType type;
     void *container;
     void *data;
-    size_t container_size;
+    // size_t container_size;
     conProp pointing_container_properties;
 
 } Iterator;
@@ -56,5 +56,6 @@ int setContainerIteratorPropertiesAsPerType(DataType type, Iterator *itr, void *
         // iterator->pointing_container_properties.capacity = ((Vector *)container)->capacity;
         return CONTAINER_ITERATOR_PROP_SUCC;
     }
+    //adding more types checking as needed.
     return CONTAINER_ITERATOR_PROP_ERR;
 }

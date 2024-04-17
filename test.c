@@ -73,11 +73,14 @@ int main()
     advance_by(it, 4);
     printf("Value at 6: %d \n", *((int *)it->data));
 
+    Iterator *beginItr = create_iterator(VECTOR_INT, int_vector);
+    printf("Value at itr begin: %d \n", *((int* )begin(int_vector)));
+
+    int* firstElement = begin(int_vector);
+    printf("First's value: %d", *firstElement);
+
 
     // Deleting vectors to free memory
-
-
-
     delete_vector(int_vector);
     delete_vector(float_vector);
     delete_vector(char_vector);

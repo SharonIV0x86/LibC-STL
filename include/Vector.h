@@ -11,13 +11,9 @@ Iterator *create_iterator(DataType type, void *container)
     iterator->type = type;
     iterator->index = 0;
     iterator->container = container;
+
+    if (setContainerIteratorPropertiesAsPerType(type, iterator, container));
     
-    if(setContainerIteratorPropertiesAsPerType(type, iterator, container));
-    // if(type == VECTOR_INT){
-    // printf("\nIterator pointing to vector_int \n");
-    // iterator->pointing_container_properties.size = ((Vector *)container)->size;
-    // iterator->pointing_container_properties.capacity = ((Vector *)container)->capacity;
-    // }
     if (container != NULL)
     {
         if (iterator != NULL)
@@ -30,8 +26,12 @@ Iterator *create_iterator(DataType type, void *container)
 }
 void advance(Iterator *itr)
 {
-    if (itr != NULL && itr->data != NULL)
+    if (itr != NULL && itr->data != NULL )
     {
+        if(itr->index == itr->pointing_container_properties.size){
+            printf("\n\n Invalid advance arg. Container going OOB \n\n");
+            exit(EXIT_FAILURE);
+        }
         itr->data = at(itr->container, itr->index + 1);
         itr->index++;
     }
@@ -40,9 +40,27 @@ void advance_by(Iterator *itr, size_t step)
 {
     if (itr != NULL && itr->data != NULL && step >= 0)
     {
-        itr->data = at(itr->container, itr->index + step);
-        itr->index += step;
+        if (itr->index + step > itr->pointing_container_properties.size)
+        {
+            printf("\nInvalid advance_by arg. Container going OOB \n\n");
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            itr->data = at(itr->container, itr->index + step);
+            itr->index += step;
+        }
     }
+}
+Iterator* begin(void* container){
+    Iterator *itr = (Iterator *)malloc(sizeof(Iterator));
+    
+    itr->container = container;
+    itr->index = 0;
+    itr->data = at(container, 0);
+    // printf("Container type: %d", itr->pointing_container_properties.cntType); DEBUG
+    //take inspiration for at function from here! 
+    return itr->data;
 }
 void itr_reset(Iterator *itr)
 {
