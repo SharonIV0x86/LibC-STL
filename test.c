@@ -1,5 +1,5 @@
 #include "./include/Vector.h"
-
+#include "./include/Iterator.h"
 int main()
 {
     // Creating vectors for different data types
@@ -8,7 +8,6 @@ int main()
     Vector *char_vector = create_vector(5, CHAR);
     Vector *string_vector = create_vector(5, STR);
     Vector *double_vector = create_vector(5, DOUBLE);
-
     // Pushing data into the vectors
     pb_int(int_vector, 10);
     pb_int(int_vector, 20);
@@ -43,12 +42,27 @@ int main()
     pb_double(double_vector, 2.71828);
     pb_double(double_vector, 1.41421);
 
+
+    int a = 120;
+    int b = 130;
+    int c = 140;
+    int d = 150;
+    int e = 160;
+    int f = 170;
+    
+    vector_push_back(int_vector, &a);
+    vector_push_back(int_vector, &b);
+    vector_push_back(int_vector, &c);
+    vector_push_back(int_vector, &d);
+    vector_push_back(int_vector, &e);
+    vector_push_back(int_vector, &f);
+
     // Accessing elements in the vectors
-    // printf("Int Vector:\n");
-    // for (size_t i = 0; i < int_vector->size; ++i) {
-    //     int *value = (int *)at(int_vector, i);
-    //     printf("%d\n", *value);
-    // }
+    printf("Int Vector:\n");
+    for (size_t i = 0; i < int_vector->size; ++i) {
+        // int *value = (int *)at(int_vector, i);
+        printf("%d\n", *(int *)vector_at(int_vector, i));
+    }
 
     // printf("Float Vector:\n");
     // for (size_t i = 0; i < float_vector->size; ++i) {
@@ -68,17 +82,16 @@ int main()
     // }
     Iterator *it = create_iterator(VECTOR_INT, int_vector);
     printf("Value at 1: %d \n", *((int *)it->data));
-    advance(it);
+    Advance(it);
     printf("Value at 2: %d \n", *((int *)it->data));
-    advance_by(it, 4);
+    Advance_by(it, 4);
     printf("Value at 6: %d \n", *((int *)it->data));
 
     Iterator *beginItr = create_iterator(VECTOR_INT, int_vector);
-    printf("Value at itr begin: %d \n", *((int* )begin(int_vector)));
+    printf("Value at itr begin: %d \n", *((int* )Begin(int_vector)));
 
-    int* firstElement = begin(int_vector);
+    int* firstElement = Begin(int_vector);
     printf("First's value: %d", *firstElement);
-
 
     // Deleting vectors to free memory
     delete_vector(int_vector);
