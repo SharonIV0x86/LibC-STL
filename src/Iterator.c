@@ -1,7 +1,7 @@
 
 #include "../include/Iterator.h"
 #include "../include/Vector.h"
-Iterator *create_iterator(DataType type, void *container)
+Iterator *create_iterator(VectorContainerType type, void *container)
 {
     Iterator *iterator = (Iterator *)malloc(sizeof(Iterator));
     iterator->type = type;
@@ -58,5 +58,5 @@ Iterator *Begin(void *container)
     itr->data = vector_at(container, 0);
     // printf("Container type: %d", itr->pointing_container_properties.cntType); DEBUG
     // take inspiration for vector_at function from here!
-    return itr->data;
+    return itr;
 }

@@ -9,7 +9,7 @@
 #define CONTAINER_ITERATOR_PROP_ERR 0
 typedef enum
 {
-    STR,
+    STR=0,
     INT,
     FLOAT,
     CHAR,
@@ -17,7 +17,7 @@ typedef enum
 } DataType;
 typedef enum
 {
-    VECTOR_STR,
+    VECTOR_STR=5,
     VECTOR_INT,
     VECTOR_FLOAT,
     VECTOR_CHAR,

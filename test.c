@@ -88,9 +88,9 @@ int main()
     printf("Value at 6: %d \n", *((int *)it->data));
 
     Iterator *beginItr = create_iterator(VECTOR_INT, int_vector);
-    printf("Value at itr begin: %d \n", *((int* )Begin(int_vector)));
+    printf("Value at itr begin: %d \n", *(int *)Begin(int_vector)->data);
 
-    int* firstElement = Begin(int_vector);
+    int* firstElement = Begin(int_vector)->data;
     printf("First's value: %d", *firstElement);
 
     // Deleting vectors to free memory

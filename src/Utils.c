@@ -2,7 +2,7 @@
 #define UTILS_C
 #include "../include/Utils.h"
 
-int setContainerIteratorPropertiesAsPerType(DataType type, Iterator *itr, void *container)
+int setContainerIteratorPropertiesAsPerType(VectorContainerType type, Iterator *itr, void *container)
 {
     if (type == VECTOR_INT)
     {
