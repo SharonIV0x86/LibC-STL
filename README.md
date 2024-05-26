@@ -39,71 +39,65 @@ This project serves as a learning endeavor for me to explore dynamic memory mana
 
 ## Example
 ```c
+#include <stdio.h>
 #include "./include/Vector.h"
 
-int main() {
-    // Creating vectors for different data types
-    Vector *int_vector = create_vector(5, INT);
-    Vector *float_vector = create_vector(5, FLOAT);
-    Vector *char_vector = create_vector(5, CHAR);
-    Vector *string_vector = create_vector(5, STR);
-    Vector *double_vector = create_vector(5, DOUBLE);
+int main()
+{
+    // Creating vectors of different data types
+    Vector *int_vector = create_Vector(5, INT);
+    Vector *float_vector = create_Vector(5, FLOAT);
+    Vector *char_vector = create_Vector(5, CHAR);
+    // Vector *str_vector = create_Vector(5, STR);
+    Vector *double_vector = create_Vector(5, DOUBLE);
 
-    // Pushing data into the vectors
     pb_int(int_vector, 10);
     pb_int(int_vector, 20);
     pb_int(int_vector, 30);
 
     pb_float(float_vector, 3.14f);
-    pb_float(float_vector, 2.718f);
-    pb_float(float_vector, 1.618f);
+    pb_float(float_vector, 2.71f);
 
     pb_char(char_vector, 'a');
     pb_char(char_vector, 'b');
     pb_char(char_vector, 'c');
 
-    pb_string(string_vector, "The cat meows");
-    pb_string(string_vector, "The dog barks");
-    pb_string(string_vector, "The cow moos");
+    pb_double(double_vector, 1.234);
+    pb_double(double_vector, 5.678);
 
-    //Inputting string with fgets
-    printf("Enter the string: ");
-    char strr[30] = " ";
-    pb_string(string_vector, fgets(strr, sizeof(strr), stdin));
-
-    pb_double(double_vector, 3.14159);
-    pb_double(double_vector, 2.71828);
-    pb_double(double_vector, 1.41421);
-
-    // Accessing elements in the vectors
-    printf("Int Vector:\n");
-    for (size_t i = 0; i < int_vector->size; ++i) {
-        int *value = (int *)at(int_vector, i);
-        printf("%d\n", *value);
+    printf("Int vector:\n");
+    for (size_t i = 0; i < int_vector->size; ++i)
+    {
+        printf("%d ", *(int *)at(int_vector, i));
     }
+    printf("\n");
 
-    printf("Float Vector:\n");
-    for (size_t i = 0; i < float_vector->size; ++i) {
-        float *value = (float *)at(float_vector, i);
-        printf("%f\n", *value);
+    printf("Float vector:\n");
+    for (size_t i = 0; i < float_vector->size; ++i)
+    {
+        printf("%f ", *(float *)at(float_vector, i));
     }
+    printf("\n");
 
-    printf("Char Vector:\n");
-    for (size_t i = 0; i < char_vector->size; ++i) {
-        char *value = (char *)at(char_vector, i);
-        printf("%c\n", *value);
+    printf("Char vector:\n");
+    for (size_t i = 0; i < char_vector->size; ++i)
+    {
+        printf("%c ", *(char *)at(char_vector, i));
     }
+    printf("\n");
 
-    printf("String Vector: ");
-    for (size_t i = 0; i < string_vector->size; ++i) {
-        puts((char *)(at(string_vector, i)));
+    printf("Double vector:\n");
+    for (size_t i = 0; i < double_vector->size; ++i)
+    {
+        printf("%f ", *(double *)at(double_vector, i));
     }
+    printf("\n");
 
-    // Deleting vectors to free memory
+    // Freeing memory
     delete_vector(int_vector);
     delete_vector(float_vector);
     delete_vector(char_vector);
-    delete_vector(string_vector);
+    delete_vector(double_vector);
 
     return 0;
 }
