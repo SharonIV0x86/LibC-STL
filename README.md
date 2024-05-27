@@ -48,46 +48,45 @@ int main()
     Vector *int_vector = create_Vector(5, INT);
     Vector *float_vector = create_Vector(5, FLOAT);
     Vector *char_vector = create_Vector(5, CHAR);
-    // Vector *str_vector = create_Vector(5, STR);
     Vector *double_vector = create_Vector(5, DOUBLE);
-
-    pb_int(int_vector, 10);
-    pb_int(int_vector, 20);
-    pb_int(int_vector, 30);
-
-    pb_float(float_vector, 3.14f);
-    pb_float(float_vector, 2.71f);
-
-    pb_char(char_vector, 'a');
-    pb_char(char_vector, 'b');
-    pb_char(char_vector, 'c');
-
-    pb_double(double_vector, 1.234);
-    pb_double(double_vector, 5.678);
+    // Populating vectors
+    push_Back(int_vector, 90);
+    push_Back(float_vector, 1.2f);
+    push_Back(double_vector, 3.43234);
+    push_Back(char_vector, (char)'H');
+    push_Back(char_vector, (char)'e');
+    push_Back(char_vector, (char)'l');
+    push_Back(char_vector, (char)'l');
+    push_Back(char_vector, (char)'o');
+    push_Back(char_vector, (char)'W');
+    push_Back(char_vector, (char)'o');
+    push_Back(char_vector, (char)'r');
+    push_Back(char_vector, (char)'l');
+    push_Back(char_vector, (char)'d');
 
     printf("Int vector:\n");
-    for (size_t i = 0; i < int_vector->size; ++i)
+    for (size_t i = 0; i < vector_size(int_vector); ++i)
     {
         printf("%d ", *(int *)at(int_vector, i));
     }
     printf("\n");
 
     printf("Float vector:\n");
-    for (size_t i = 0; i < float_vector->size; ++i)
+    for (size_t i = 0; i < vector_size(float_vector); ++i)
     {
         printf("%f ", *(float *)at(float_vector, i));
     }
     printf("\n");
 
     printf("Char vector:\n");
-    for (size_t i = 0; i < char_vector->size; ++i)
+    for (size_t i = 0; i < vector_size(char_vector); ++i)
     {
-        printf("%c ", *(char *)at(char_vector, i));
+        printf("%c", *(char *)at(char_vector, i));
     }
     printf("\n");
 
     printf("Double vector:\n");
-    for (size_t i = 0; i < double_vector->size; ++i)
+    for (size_t i = 0; i < vector_size(double_vector); ++i)
     {
         printf("%f ", *(double *)at(double_vector, i));
     }
@@ -98,7 +97,13 @@ int main()
     else
         printf("Vector is not empty! ");
 
-    // Freeing memory
+    printf("Size of int_vector %zu \n", vector_size(int_vector));
+    printf("Size of float_vector %zu \n", vector_size(float_vector));
+    printf("Size of char_vector %zu \n", vector_size(char_vector));
+    printf("Size of double_vector %zu \n", vector_size(double_vector));
+
+    printf("\nTesting generic push back! \n");
+    push_Back(int_vector, 90);
     delete_vector(int_vector);
     delete_vector(float_vector);
     delete_vector(char_vector);
@@ -106,6 +111,7 @@ int main()
 
     return 0;
 }
+
 ```
 
 ## Feedback and Support
