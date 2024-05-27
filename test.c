@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "./include/Vector.h"
 
-int main() {
+int main()
+{
     // Creating vectors of different data types
     Vector *int_vector = create_Vector(5, INT);
     Vector *float_vector = create_Vector(5, FLOAT);
@@ -9,6 +10,7 @@ int main() {
     // Vector *str_vector = create_Vector(5, STR);
     Vector *double_vector = create_Vector(5, DOUBLE);
 
+    // Populating vectors
     pb_int(int_vector, 10);
     pb_int(int_vector, 20);
     pb_int(int_vector, 30);
@@ -23,25 +25,28 @@ int main() {
     // pb_string(str_vector, "Hello");
     // pb_string(str_vector, "World");
     // pb_string(str_vector, "Jasper");
-    
+
     pb_double(double_vector, 1.234);
     pb_double(double_vector, 5.678);
 
     printf("Int vector:\n");
-    for (size_t i = 0; i < int_vector->size; ++i) {
-        printf("%d ", *(int*)at(int_vector, i));
+    for (size_t i = 0; i < int_vector->size; ++i)
+    {
+        printf("%d ", *(int *)at(int_vector, i));
     }
     printf("\n");
 
     printf("Float vector:\n");
-    for (size_t i = 0; i < float_vector->size; ++i) {
-        printf("%f ", *(float*)at(float_vector, i));
+    for (size_t i = 0; i < float_vector->size; ++i)
+    {
+        printf("%f ", *(float *)at(float_vector, i));
     }
     printf("\n");
 
     printf("Char vector:\n");
-    for (size_t i = 0; i < char_vector->size; ++i) {
-        printf("%c ", *(char*)at(char_vector, i));
+    for (size_t i = 0; i < char_vector->size; ++i)
+    {
+        printf("%c ", *(char *)at(char_vector, i));
     }
     printf("\n");
 
@@ -52,10 +57,16 @@ int main() {
     // printf("\n");
 
     printf("Double vector:\n");
-    for (size_t i = 0; i < double_vector->size; ++i) {
-        printf("%f ", *(double*)at(double_vector, i));
+    for (size_t i = 0; i < double_vector->size; ++i)
+    {
+        printf("%f ", *(double *)at(double_vector, i));
     }
     printf("\n");
+    
+    if (empty_vector(int_vector))
+        printf("Vector is empty! ");
+    else
+        printf("Vector is not empty! ");
 
     // Freeing memory
     delete_vector(int_vector);

@@ -93,6 +93,11 @@ int main()
     }
     printf("\n");
 
+    if (empty_vector(int_vector))
+        printf("Vector is empty! ");
+    else
+        printf("Vector is not empty! ");
+
     // Freeing memory
     delete_vector(int_vector);
     delete_vector(float_vector);
