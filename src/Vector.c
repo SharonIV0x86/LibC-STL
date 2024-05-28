@@ -128,7 +128,6 @@ int pb_char(Vector *vec, char ch)
 
     *(char *)(vec->data[vec->size]) = ch;
     ++vec->size;
-    printf("Pushing to char vector probably success! \n");
     return 1;
 }
 int pb_double(Vector *vec, double value)
