@@ -1,12 +1,14 @@
 #include "../include/Vector.h"
 
-struct vector
-{
-    void **data;
-    size_t capacity;
-    size_t size;
-    DataType type;
-};
+// struct vector
+// {
+//     void **data;
+//     size_t capacity;
+//     size_t size;
+//     DataType type;
+// };
+
+
 Vector *create_Vector(size_t capacity, DataType type)
 {
 
@@ -58,7 +60,7 @@ int resize_vector(Vector *vec, size_t size)
     }
     return 1;
 }
-int pb_int(Vector *vec, int value)
+int LIBC_INTERNAL_pb_int(Vector *vec, int value)
 {
     if (vec->type != INT)
     {
@@ -66,7 +68,7 @@ int pb_int(Vector *vec, int value)
     }
     if (vec->size >= vec->capacity)
     {
-        size_t new_capacity = (vec->capacity == 0) ? 1 : vec->capacity * 1.5;
+        size_t new_capacity = (vec->capacity == 0) ? 1 : vec->capacity * 2;
         if (!resize_vector(vec, new_capacity))
         {
             return 0;
@@ -81,7 +83,7 @@ int pb_int(Vector *vec, int value)
     ++vec->size;
     return 1;
 }
-int pb_float(Vector *vec, float value)
+int LIBC_INTERNAL_pb_float(Vector *vec, float value)
 {
     if (vec->type != FLOAT)
     {
@@ -91,7 +93,7 @@ int pb_float(Vector *vec, float value)
 
     if (vec->size >= vec->capacity)
     {
-        size_t new_capacity = (vec->capacity == 0) ? 1 : vec->capacity * 1.5;
+        size_t new_capacity = (vec->capacity == 0) ? 1 : vec->capacity * 2;
         if (!resize_vector(vec, new_capacity))
         {
             return 0;
@@ -105,9 +107,8 @@ int pb_float(Vector *vec, float value)
     ++vec->size;
     return 1;
 }
-int pb_char(Vector *vec, char ch)
+int LIBC_INTERNAL_pb_char(Vector *vec, char ch)
 {
-    printf("Pushing to char vector probably success! \n");
 
     if (vec->type != CHAR)
     {
@@ -116,7 +117,7 @@ int pb_char(Vector *vec, char ch)
     }
     if (vec->size >= vec->capacity)
     {
-        size_t __new_capacity = (vec->capacity == 0) ? 1 : vec->capacity * 1.5;
+        size_t __new_capacity = (vec->capacity == 0) ? 1 : vec->capacity * 2;
         if (!resize_vector(vec, __new_capacity))
         {
             return 0;
@@ -130,7 +131,7 @@ int pb_char(Vector *vec, char ch)
     ++vec->size;
     return 1;
 }
-int pb_double(Vector *vec, double value)
+int LIBC_INTERNAL_pb_double(Vector *vec, double value)
 {
     if (vec->type != DOUBLE)
     {
@@ -139,7 +140,7 @@ int pb_double(Vector *vec, double value)
     }
     if (vec->size >= vec->capacity)
     {
-        size_t __new__capacity = (vec->capacity == 0) ? 1 : vec->capacity * 1.5;
+        size_t __new__capacity = (vec->capacity == 0) ? 1 : vec->capacity * 2;
         if (!resize_vector(vec, __new__capacity))
         {
             return 0;
@@ -163,7 +164,56 @@ void *at(Vector *vec, size_t index)
     }
     return vec->data[index];
 }
+int AtInt(Vector *vec, int index)
+{
+    if (index >= vec->size)
+    {
+        fprintf(stderr, "Error: Index out of bounds\n");
+        exit(EXIT_FAILURE);
+    }
+    return *((int *)(vec->data[index]));
+}
 
+float AtFloat(Vector *vec, int index)
+{
+    if (index >= vec->size)
+    {
+        fprintf(stderr, "Error: Index out of bounds\n");
+        exit(EXIT_FAILURE);
+    }
+    return *((float *)(vec->data[index]));
+}
+
+char AtChar(Vector *vec, int index)
+{
+    if (index >= vec->size)
+    {
+        fprintf(stderr, "Error: Index out of bounds\n");
+        exit(EXIT_FAILURE);
+    }
+    return *((char *)(vec->data[index]));
+}
+
+double AtDouble(Vector *vec, int index)
+{
+    if (index >= vec->size)
+    {
+        fprintf(stderr, "Error: Index out of bounds\n");
+        exit(EXIT_FAILURE);
+    }
+    return *((double *)(vec->data[index]));
+}
+int** get_vector_int(Vector* vec){
+    return (int **)(vec->data);
+
+}
+StatusCodes LIBC_INTERNAL_insert_int(Vector* vec, int value, size_t index){
+    if(vec->type != INT){
+        return INT_INSERT_FAILED;
+    }
+    // for(size_t i = index; index < vector_size(vec); )
+
+}
 int empty_vector(Vector *vec)
 {
     return vec->size == 0;
