@@ -69,26 +69,34 @@ int main()
     printf("\n");
 
     if (empty_vector(int_vector))
-        printf("Vector is empty! ");
+        printf("Vector is empty! \n");
     else
-        printf("Vector is not empty! ");
+        printf("Vector is not empty! \n");
 
     printf("Size of int_vector %zu \n", vector_size(int_vector));
     printf("Size of float_vector %zu \n", vector_size(float_vector));
     printf("Size of char_vector %zu \n", vector_size(char_vector));
     printf("Size of double_vector %zu \n", vector_size(double_vector));
 
-
-    int** data = get_vector_int(int_vector);
+    //access vector data
+    VectorDataInt data = get_vector_int(int_vector);
     if (data)
     {
-        for (size_t i = 0; i < 10; ++i)
+        for (size_t i = 0; i < vector_size(int_vector); ++i)
         {
-            
-            printf("Value at index %zu: %d\n", i, *(get_vector_int(int_vector))[i]);
-            printf("Value at index %zu: %d\n", i, *data[i]);
+            printf("Value at index %zu: %d\n", i,  *data[i]);
         }
-        printf("\nValue at the int_vector lmao %d\n", data[3]);
+    }
+    printf("\nModifying the vector by random access! \n");
+    if(data){
+        for(int i = 0; i < vector_size(int_vector); ++i){
+            *data[i] += 12;
+        }
+    }
+    printf("\nFINAL!\n");
+    for (size_t i = 0; i < vector_size(int_vector); i++)
+    {
+        printf("%d ", AtInt(int_vector, i));
     }
     delete_vector(int_vector);
     delete_vector(float_vector);

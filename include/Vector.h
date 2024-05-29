@@ -6,7 +6,10 @@
 #include <string.h>
 #include <stddef.h>
 // typedef struct vector Vector;
-
+typedef int** VectorDataInt ;
+typedef float** VectorDataFloat ;
+typedef char** VectorDataChar ;
+typedef double** VectorDataDouble ;
 typedef enum
 {
     INT,
@@ -63,11 +66,19 @@ float AtFloat(Vector *, int);
 char AtChar(Vector *, int);
 double AtDouble(Vector *, int);
 
-int **get_vector_int(Vector *);
+int** get_vector_int(Vector *);
 
 int empty_vector(Vector *);
 void *at(Vector *, size_t);
 size_t vector_size(Vector *);
+
+#define vector_at(Container, T) _Generic(Container->type, \
+    INT: _Generic(Container->type, \
+            INT: AtInt)(Container, T) \
+    FLOAT: _Generic(Container->type, \
+            FLOAT: AtFloat)(Container, T)\
+)(Container, T)
+
 
 #define push_Back(Container, T) _Generic((T), \
     int: LIBC_INTERNAL_pb_int,                \

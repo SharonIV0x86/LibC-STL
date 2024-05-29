@@ -8,7 +8,6 @@
 //     DataType type;
 // };
 
-
 Vector *create_Vector(size_t capacity, DataType type)
 {
 
@@ -204,15 +203,19 @@ double AtDouble(Vector *vec, int index)
     return *((double *)(vec->data[index]));
 }
 int** get_vector_int(Vector* vec){
+    // return (int *)((int **)(*vec->data));
+    // return AtInt(vec, 0);
     return (int **)(vec->data);
 
 }
-StatusCodes LIBC_INTERNAL_insert_int(Vector* vec, int value, size_t index){
-    if(vec->type != INT){
+
+StatusCodes LIBC_INTERNAL_insert_int(Vector *vec, int value, size_t index)
+{
+    if (vec->type != INT)
+    {
         return INT_INSERT_FAILED;
     }
     // for(size_t i = index; index < vector_size(vec); )
-
 }
 int empty_vector(Vector *vec)
 {
