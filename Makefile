@@ -1,22 +1,19 @@
-CC=gcc
-CFLAGS=-Iinclude
-SRC_DIR=src
-OBJ_DIR=obj
+CC = gcc
+CFLAGS = -Iinclude -Wall -Wextra -g
+SRC = src/Vector.c test.c
+OBJ = obj/Vector.o obj/test.o
+TARGET = test
 
-# List all source files
-SRCS=$(wildcard $(SRC_DIR)/*.c)
+all: $(TARGET)
 
-# Generate corresponding object file names
-OBJS=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET)
 
-# Default target
-all: $(OBJS) test.c
-	$(CC) $(CFLAGS) $(OBJS) test.c -o LibC_STLtest
+obj/Vector.o: src/Vector.c
+	$(CC) $(CFLAGS) -c src/Vector.c -o obj/Vector.o
 
-# Rule to compile each source file into object file
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+obj/test.o: test.c
+	$(CC) $(CFLAGS) -c test.c -o obj/test.o
 
-# Clean rule
 clean:
-	rm -f $(OBJS) LibC_STLtest
+	rm -f obj/*.o $(TARGET)

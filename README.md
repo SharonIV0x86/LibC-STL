@@ -42,75 +42,66 @@ This project serves as a learning endeavor for me to explore dynamic memory mana
 #include <stdio.h>
 #include "./include/Vector.h"
 
+typedef struct mystruct
+{
+    int data;
+    char *name;
+} MyStruct;
+
 int main()
 {
-    // Creating vectors of different data types
-    Vector *int_vector = create_Vector(5, INT);
-    Vector *float_vector = create_Vector(5, FLOAT);
-    Vector *char_vector = create_Vector(5, CHAR);
-    Vector *double_vector = create_Vector(5, DOUBLE);
-    // Populating vectors
-    push_Back(int_vector, 90);
-    push_Back(float_vector, 1.2f);
-    push_Back(double_vector, 3.43234);
-    push_Back(char_vector, (char)'H');
-    push_Back(char_vector, (char)'e');
-    push_Back(char_vector, (char)'l');
-    push_Back(char_vector, (char)'l');
-    push_Back(char_vector, (char)'o');
-    push_Back(char_vector, (char)'W');
-    push_Back(char_vector, (char)'o');
-    push_Back(char_vector, (char)'r');
-    push_Back(char_vector, (char)'l');
-    push_Back(char_vector, (char)'d');
+    Vector *int_vec = vector_create(sizeof(int));
 
-    printf("Int vector:\n");
-    for (size_t i = 0; i < vector_size(int_vector); ++i)
+    int values[] = {10, 20, 30, 40, 50};
+    for (int i = 0; i < 5; i++)
     {
-        printf("%d ", *(int *)at(int_vector, i));
+        vector_push_back(int_vec, &values[i]);
+    }
+
+    printf("Integer Vector:\n");
+    for (size_t i = 0; i < vector_size(int_vec); i++)
+    {
+        printf("%d ", *(int *)vector_at(int_vec, i));
     }
     printf("\n");
 
-    printf("Float vector:\n");
-    for (size_t i = 0; i < vector_size(float_vector); ++i)
+    vector_destroy(int_vec);
+
+    Vector *double_vec = vector_create(sizeof(double));
+
+    double dvalues[] = {1.1, 2.2, 3.3, 4.4};
+    for (int i = 0; i < 4; i++)
     {
-        printf("%f ", *(float *)at(float_vector, i));
+        vector_push_back(double_vec, &dvalues[i]);
+    }
+
+    printf("Double Vector:\n");
+    for (size_t i = 0; i < vector_size(double_vec); i++)
+    {
+        printf("%.1f ", *(double *)vector_at(double_vec, i));
     }
     printf("\n");
 
-    printf("Char vector:\n");
-    for (size_t i = 0; i < vector_size(char_vector); ++i)
-    {
-        printf("%c", *(char *)at(char_vector, i));
+    vector_destroy(double_vec);
+    MyStruct v1 = {10, "Jasper"};
+    MyStruct v2 = {20, "Kasper"};
+    MyStruct v3 = {30, "Hasper"};
+    MyStruct v4 = {40, "Gasper"};
+
+    Vector *custom_vec = vector_create(sizeof(MyStruct));
+    vector_push_back(custom_vec, &v1);
+    vector_push_back(custom_vec, &v2);
+    vector_push_back(custom_vec, &v3);
+    vector_push_back(custom_vec, &v4);
+     
+    for(size_t i = 0; i < vector_size(custom_vec); i++){
+        MyStruct *item = (MyStruct*)vector_at(custom_vec, i);
+        printf("%d %s\n", item->data, item->name);
     }
-    printf("\n");
-
-    printf("Double vector:\n");
-    for (size_t i = 0; i < vector_size(double_vector); ++i)
-    {
-        printf("%f ", *(double *)at(double_vector, i));
-    }
-    printf("\n");
-
-    if (empty_vector(int_vector))
-        printf("Vector is empty! ");
-    else
-        printf("Vector is not empty! ");
-
-    printf("Size of int_vector %zu \n", vector_size(int_vector));
-    printf("Size of float_vector %zu \n", vector_size(float_vector));
-    printf("Size of char_vector %zu \n", vector_size(char_vector));
-    printf("Size of double_vector %zu \n", vector_size(double_vector));
-
-    printf("\nTesting generic push back! \n");
-    push_Back(int_vector, 90);
-    delete_vector(int_vector);
-    delete_vector(float_vector);
-    delete_vector(char_vector);
-    delete_vector(double_vector);
 
     return 0;
 }
+
 
 ```
 
