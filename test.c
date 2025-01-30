@@ -57,6 +57,10 @@ int main()
         MyStruct *item = (MyStruct*)vector_at(custom_vec, i);
         printf("%d %s\n", item->data, item->name);
     }
-
+    vector_iterator *itr = create_iterator(custom_vec);
+    while(iterator_has_next(itr)){
+        MyStruct *item = (MyStruct *)iterator_next(itr);
+        printf("%s ", item->name);
+    }
     return 0;
 }

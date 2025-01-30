@@ -21,7 +21,11 @@ typedef struct {
     size_t capacity;
     size_t size;
 } Vector;
-
+typedef struct vectoriterator{
+    Vector* vector;
+    size_t pos;
+    void *item;
+} vector_iterator;
 typedef struct MemoryPool {
     void *blocks;
     size_t block_size;
@@ -32,11 +36,16 @@ MemoryPool *create_pool(size_t block_size);
 void *pool_alloc(MemoryPool *pool, size_t size);
 void destroy_pool(MemoryPool *pool);
 
+VectorStatus vector_push_back(Vector *vec, void *element);
 Vector *vector_create(size_t element_size);
 void vector_destroy(Vector *vec);
-VectorStatus vector_push_back(Vector *vec, void *element);
 void *vector_at(Vector *vec, size_t index);
 bool vector_empty(Vector *vec);
 size_t vector_size(Vector *vec);
 
+
+vector_iterator* create_iterator(Vector *vector);
+bool iterator_has_next(vector_iterator *itr);
+void *iterator_next(vector_iterator* itr);
+void destroy_iterator(vector_iterator *itr);
 #endif 
