@@ -28,3 +28,17 @@ void *iterator_next(vector_iterator* itr){
 void destroy_iterator(vector_iterator *itr){
     free(itr);
 }
+vector_iterator *iterator_front(Vector *vector){
+    if(!vector) return NULL;
+    vector_iterator *vitr = (vector_iterator*)malloc(sizeof(vector_iterator));
+
+    if(!vitr) return NULL;
+    // if(vector->size)
+    
+    
+    vitr->item = vector->data;
+    vitr->pos = 0;
+
+    return vitr;
+
+}

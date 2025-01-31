@@ -87,3 +87,7 @@ bool vector_empty(Vector *vec) {
 size_t vector_size(Vector *vec) {
     return vec->size;
 }
+
+size_t vector_capacity(Vector* vector){
+    return vector->capacity;
+}

@@ -32,20 +32,24 @@ typedef struct MemoryPool {
     size_t used;
 } MemoryPool;
 
+// memory pool
 MemoryPool *create_pool(size_t block_size);
 void *pool_alloc(MemoryPool *pool, size_t size);
 void destroy_pool(MemoryPool *pool);
 
+// vector
 VectorStatus vector_push_back(Vector *vec, void *element);
 Vector *vector_create(size_t element_size);
 void vector_destroy(Vector *vec);
 void *vector_at(Vector *vec, size_t index);
 bool vector_empty(Vector *vec);
 size_t vector_size(Vector *vec);
+size_t vector_capacity(Vector* vec);
 
-
+// vector iterators
 vector_iterator* create_iterator(Vector *vector);
 bool iterator_has_next(vector_iterator *itr);
 void *iterator_next(vector_iterator* itr);
 void destroy_iterator(vector_iterator *itr);
+vector_iterator *iterator_front(Vector * vector);
 #endif 
